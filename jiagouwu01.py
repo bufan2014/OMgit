@@ -1,5 +1,5 @@
 #-*- coding: UTF-8 -*- 
-'''作用--从商品详情页加购物车并查看购物车
+'''作用--从商品详情页加购物车并查看购物车，不包括下单
    状态--done'''
 
 from selenium import webdriver
