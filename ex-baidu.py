@@ -1,7 +1,3 @@
-#-*- coding: UTF-8 -*- 
-'''作用--从商品详情页加购物车并查看购物车
-   状态--done'''
-
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -9,30 +5,20 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 import unittest, time, re
 
-class Jiagouwu01(unittest.TestCase):
+class ExBaidu(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
-        self.driver.implicitly_wait(20)
-        self.base_url = "http://www.tsdian.com/"
+        self.driver.implicitly_wait(10)
+        self.base_url = "http://www.baidu.com"
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_jiagouwu01(self):
+    def test_ex_baidu(self):
         driver = self.driver
-        driver.get(self.base_url + "product-10375.html")
-        driver.find_element_by_xpath("//label[@class='item-size']").click()
-        time.sleep(1)
-        #driver.find_element_by_css_selector("label.item-size > span").click()
-        
-        driver.find_element_by_id("det_img_variant_image_10375_329_601").click()
-        time.sleep(1)
-        driver.find_element_by_id("button_cart_10375").click()
-        
-        driver.find_element_by_link_text("查看购物车").click()
-        time.sleep(3)
-
-        driver.find_element_by_link_text("去结算").click()
-        time.sleep(3)
+        driver.get(self.base_url + "/")
+        #driver.find_element_by_id("kw1").clear()
+        driver.find_element_by_id("kw1").send_keys("selenium")
+        driver.find_element_by_id("su1").click()
     
     def is_element_present(self, how, what):
         try: self.driver.find_element(by=how, value=what)

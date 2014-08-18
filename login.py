@@ -1,5 +1,5 @@
-#-*- coding: UTF-8 -*- 
-'''作用--从商品详情页加购物车并查看购物车
+#-*- coding:utf-8 -*_
+'''作用--正向登录
    状态--done'''
 
 from selenium import webdriver
@@ -9,7 +9,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 import unittest, time, re
 
-class Jiagouwu01(unittest.TestCase):
+class Login(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.implicitly_wait(20)
@@ -17,21 +17,31 @@ class Jiagouwu01(unittest.TestCase):
         self.verificationErrors = []
         self.accept_next_alert = True
     
-    def test_jiagouwu01(self):
+    def test_login(self):
         driver = self.driver
-        driver.get(self.base_url + "product-10375.html")
-        driver.find_element_by_xpath("//label[@class='item-size']").click()
+        driver.get(self.base_url)
+        driver.find_element_by_link_text(u"登录").click()
         time.sleep(1)
-        #driver.find_element_by_css_selector("label.item-size > span").click()
-        
-        driver.find_element_by_id("det_img_variant_image_10375_329_601").click()
+        driver.find_element_by_id("email").clear()
+        driver.find_element_by_id("email").send_keys("bufan001@test.com")
+        driver.find_element_by_id("J_checkpsw").clear()
+        driver.find_element_by_id("J_checkpsw").send_keys("bufan001")
         time.sleep(1)
-        driver.find_element_by_id("button_cart_10375").click()
-        
-        driver.find_element_by_link_text("查看购物车").click()
-        time.sleep(3)
-
-        driver.find_element_by_link_text("去结算").click()
+        driver.find_element_by_name("dispatch[auth.login]").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"退出").click()
+        driver.find_element_by_link_text(u"登录").click()
+        time.sleep(1)
+        driver.find_element_by_id("email").clear()
+        driver.find_element_by_id("email").send_keys("bufan001@test.com")
+        driver.find_element_by_id("J_checkpsw").clear()
+        driver.find_element_by_id("J_checkpsw").send_keys("bufan001")
+        driver.find_element_by_id("rember").click()
+        time.sleep(1)
+        driver.find_element_by_name("dispatch[auth.login]").click()
+        time.sleep(1)
+        driver.find_element_by_link_text(u"退出").click()
+        driver.find_element_by_link_text(u"登录").click()
         time.sleep(3)
     
     def is_element_present(self, how, what):
